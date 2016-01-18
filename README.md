@@ -93,13 +93,13 @@ var COLOR = 'red'
 
  * items: Array
 
-    The items prop can be an array of strings/objects or mixed. If an array of strings, the strings will be used as both value and label. If objects, `item.value` will be used as a value, and `item.label` as a string:
+    The items prop can be an array of strings/objects or mixed. If an array of strings, the strings will be used as both value and label. If objects, `item.value` will be used as a value, and `item.label` as a radio label:
 
     Example:
     ```js
         var items = [
             {label: 'Green', value: 'green'},
-            {label: 'Blueish', value: 'blue'},
+            {label: <b>Blueish</b>, value: 'blue'},
             {value: 'red'} //'red' will be used as both value and label
         ]
 
@@ -107,7 +107,7 @@ var COLOR = 'red'
         var items = ['green', 'blue', 'red']
     ```
 
-    If an array item is an object, besides `value`, `label`, and `children`, it can also have a `style` property,a `checkedStyle` property, and a `disabled` property.
+    If an array item is an object, besides `value` and `label`, it can also have a `style` property, a `checkedStyle` property, and a `disabled` property.
 
     ```js
     var items = [
@@ -123,7 +123,7 @@ var COLOR = 'red'
     ]
     ```
 
- * children - if the component specifies children, the radio group children will not be generated from `items`, but will be what you specify in the `children` prop
+ * children - if the `RadioGroup` component specifies children, the radio group children will not be generated from `items`, but will be what you specify in the `children` prop
 
 If you have a ref to the `react-radio` component, you can also call `group.getValue()` to get the current value of the radio group.
 

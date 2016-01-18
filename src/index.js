@@ -143,7 +143,7 @@ export default class ReactRadioGroup extends Component {
                 children = item
             } else {
                 value    = item.value
-                children = item.label || item.value || item.children
+                children = item.label || item.value
                 checked  = checkedValue == value
                 disabled = !!item.disabled
 

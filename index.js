@@ -6,7 +6,7 @@ import RadioGroup from './src'
 var items = [
     {
         value: 'apple',
-        label: 'Apple'
+        label: <b>Apple</b>
     },
     {
         value: 'test',
