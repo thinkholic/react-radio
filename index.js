@@ -9,7 +9,8 @@ var items = [
         label: 'Apple'
     },
     {
-        value: 'test'
+        value: 'test',
+        disabled: true
     },
     'orange',
     'watermelon'
@@ -24,11 +25,11 @@ var App = React.createClass({
         this.setState({})
     },
 
-    buildRadio: function(props, index, arr){
+    renderRadio: function(props, index, arr){
         props.children[0] = props.checked? 'x' : 'o'
         //props.children.push(...) you could also add a
         //hidden input for the value, if you need to submitzzz
-        props.onClick = this.onChange.bind(this, props.value)
+        // props.onClick = this.onChange.bind(this, props.value)
     },
 
     render: function() {
@@ -49,7 +50,7 @@ var App = React.createClass({
                     labelStyle={{padding: 10}}
                     name="values"
                     items={items}
-                    xrenderRadio={this.buildRadio}
+                    xrenderRadio={this.renderRadio}
                 />
             </div>
         )

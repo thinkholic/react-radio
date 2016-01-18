@@ -54,10 +54,12 @@ var COLOR = 'red'
  * name: String - the name to be set to all radios in the group
  * value/defaultValue - the value that should be checked in the group (controlled/uncontrolled)
  * labelStyle - a style for the radio label
+ * disabledStyle|disabledLabelStyle - a style for the radio label, when disabled
  * inputStyle - a style for the radio input
 
  * checkedLabelStyle - a style for the checked radio label
  * checkedInputStyle - a style for the checked radio input
+ * disabledInputStyle - a style for the disabled radio input
 
  * onChange: Function(value, event) - the function to be calle when the radio group value changes. NOTE: first param sent to this function is the new value, not the event object, as usual
 
@@ -105,7 +107,7 @@ var COLOR = 'red'
         var items = ['green', 'blue', 'red']
     ```
 
-    If an array item is an object, besides `value` and `label`, it can also have a `style` property and a `checkedStyle` property.
+    If an array item is an object, besides `value`, `label`, and `children`, it can also have a `style` property,a `checkedStyle` property, and a `disabled` property.
 
     ```js
     var items = [
@@ -113,6 +115,8 @@ var COLOR = 'red'
         {
             label: 'Blue',
             value: 'blue',
+            disabled: true,
+            disabledStyle: { color: 'gray' },
             style: { color: 'blue'},
             checkedStyle: { color: 'blue', background: 'red'}
         }
@@ -142,14 +146,14 @@ $ npm install
 $ npm run dev 
 ```
 
-Now navigate to [localhost:9191](http://localhost:9091/)
+Now navigate to [localhost:9191](http://localhost:9191/)
 
 Before building a new version, make sure you run
 
 ```sh
 $ npm run build
 ```
-which compiles the `src` folder (which contains jsx files) into the `lib` folder (only valid EcmaScript 5 files).
+which compiles the `src` folder (which contains jsx syntax) into the `lib` folder (only valid EcmaScript 5 files).
 
 ## License
 

@@ -131,6 +131,8 @@ export default class ReactRadioGroup extends Component {
 
             var inputStyle = assign({}, props.inputStyle)
             var labelStyle = assign({}, props.labelStyle)
+            var disabledStyle = assign({}, props.disabledStyle)
+            var disabled = false
             var checked
             var value
             var children
@@ -143,6 +145,7 @@ export default class ReactRadioGroup extends Component {
                 value    = item.value
                 children = item.label || item.value || item.children
                 checked  = checkedValue == value
+                disabled = !!item.disabled
 
                 if (item.inputStyle){
                     assign(inputStyle, item.inputStyle)
@@ -152,11 +155,21 @@ export default class ReactRadioGroup extends Component {
                 }
             }
 
+            if (disabled){
+
+              assign(inputStyle, props.disabledInputStyle)
+              assign(labelStyle, props.disabledStyle, props.disabledLabelStyle)
+
+              if (item && item.disabledStyle){
+                assign(labelStyle, item.disabledStyle)
+              }
+            }
+
             if (checked){
                 assign(inputStyle, props.checkedInputStyle)
                 assign(labelStyle, props.checkedLabelStyle)
 
-                if (checked && item && item.checkedStyle){
+                if (item && item.checkedStyle){
                     assign(labelStyle, item.checkedStyle)
                 }
             }
@@ -166,6 +179,7 @@ export default class ReactRadioGroup extends Component {
                 value   : value,
                 name    : props.name,
                 type    : 'radio',
+                disabled: disabled,
                 style   : inputStyle,
                 onChange: emptyFn
             }
