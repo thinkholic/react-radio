@@ -7,7 +7,7 @@ See demo at [zippyui.github.io/react-radio](http://zippyui.github.io/react-radio
 ## Install
 
 ```sh
-$ npm install react-radio
+$ npm install react-radio --save
 ```
 
 ## Usage
@@ -139,11 +139,10 @@ For setting up the project locally, use:
 $ git clone https://github.com/zippyui/react-radio
 $ cd react-radio
 $ npm install
-$ npm serve # to start http server
-$ npm dev   * to start webpack-dev-server
+$ npm run dev 
 ```
 
-Now navigate to [localhost:9091](http://localhost:9091/)
+Now navigate to [localhost:9191](http://localhost:9091/)
 
 Before building a new version, make sure you run
 

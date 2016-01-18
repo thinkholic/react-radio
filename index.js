@@ -1,7 +1,7 @@
 'use strict';
 
-var React      = require('react')
-var RadioGroup = require('./src')
+import { render } from 'react-dom'
+import RadioGroup from './src'
 
 var items = [
     {
@@ -56,4 +56,4 @@ var App = React.createClass({
     }
 })
 
-React.render(<App />, document.getElementById('content'))
+render(<App />, document.getElementById('content'))

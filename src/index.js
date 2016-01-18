@@ -1,39 +1,36 @@
-'use strict';
+import React, { PropTypes } from 'react'
+import { findDOMNode } from 'react-dom'
+import Component from 'react-class'
+import assign from 'object-assign'
 
-var React = require('react')
-var assign = require('object-assign')
+const emptyFn = () => {}
 
-function emptyFn(){}
+export default class ReactRadioGroup extends Component {
 
-module.exports = React.createClass({
+    constructor(props){
+        super(props)
 
-    displayName: 'ReactRadioGroup',
-
-    propTypes: {
-        name: React.PropTypes.string.isRequired,
-        items: function(props, name){
-            if (!props.children && !props.items){
-                return new Error('Your component has no children. In this case, you should specify an items array.')
-            }
+        this.state = {
+            defaultValue: props.defaultValue
         }
-    },
+    }
 
-    componentDidUpdate: function() {
+    componentDidUpdate() {
         if (!this.shouldGenerateChildren()){
             this.setRadioNames()
             this.setCheckedRadio()
         }
-    },
+    }
 
-    componentDidMount: function() {
+    componentDidMount() {
         if (!this.shouldGenerateChildren()){
             this.setRadioNames()
             this.setCheckedRadio()
         }
-    },
+    }
 
-    setCheckedRadio: function(){
-        var value = this.props.value != null?
+    setCheckedRadio(){
+        const value = this.props.value != null?
                         this.props.value:
                         this.state.defaultValue
 
@@ -43,62 +40,45 @@ module.exports = React.createClass({
                 return true
             }
         })
-    },
+    }
 
-    setRadioNames: function() {
+    setRadioNames() {
         this.forEachRadio(function(radio){
             radio.setAttribute('name', this.props.name)
         })
-    },
+    }
 
-    someRadio: function(fn){
-        var $radios = this.getRadios()
+    someRadio(fn){
+        const $radios = this.getRadios()
 
         return [].some.call($radios, fn, this)
-    },
+    }
 
-    forEachRadio: function(fn) {
-        var $radios = this.getRadios()
+    forEachRadio(fn) {
+        const $radios = this.getRadios()
 
         return [].forEach.call($radios, fn, this)
-    },
+    }
 
-    getRadios: function() {
-        return this.getDOMNode().querySelectorAll('input[type="radio"]')
-    },
+    getRadios() {
+        return findDOMNode(this).querySelectorAll('input[type="radio"]')
+    }
 
-    getDefaultProps: function() {
-        return {
-            defaultLabelStyle: {
-                cursor: 'pointer'
-            },
-            defaultInputStyle: {
-                cursor: 'pointer'
-            }
-        }
-    },
-
-    getInitialState: function() {
-        return {
-            defaultValue: this.props.defaultValue
-        }
-    },
-
-    render: function(){
+    render(){
         var props = this.prepareProps(this.props, this.state)
 
         return <div {...props} />
-    },
+    }
 
-    getValue: function() {
+    getValue() {
         if (this.value == undefined){
             this.value = this.state.defaultValue
         }
 
         return this.value
-    },
+    }
 
-    handleChange: function(event) {
+    handleChange(event) {
         var target = event.target
         var fn     = this.props.onChange || emptyFn
         var value  = this.value = target.value
@@ -110,13 +90,13 @@ module.exports = React.createClass({
                 defaultValue: value
             })
         }
-    },
+    }
 
-    shouldGenerateChildren: function() {
+    shouldGenerateChildren() {
         return !this.props.children
-    },
+    }
 
-    prepareProps: function(thisProps, state) {
+    prepareProps(thisProps, state) {
 
         var props = {}
 
@@ -131,23 +111,23 @@ module.exports = React.createClass({
         props.onChange = this.handleChange
 
         return props
-    },
+    }
 
-    prepareLabelStyle: function(props) {
+    prepareLabelStyle(props) {
         return assign({}, props.defaultLabelStyle, props.labelStyle)
-    },
+    }
 
-    prepareInputStyle: function(props) {
+    prepareInputStyle(props) {
         return assign({}, props.defaultInputStyle, props.inputStyle)
-    },
+    }
 
-    prepareChildren: function(props, state) {
+    prepareChildren(props, state) {
 
         var checkedValue = props.value != null?
                             props.value:
                             state.defaultValue
 
-        return (props.items || []).map(function(item, index, arr){
+        return (props.items || []).map((item, index, arr) => {
 
             var inputStyle = assign({}, props.inputStyle)
             var labelStyle = assign({}, props.labelStyle)
@@ -218,6 +198,24 @@ module.exports = React.createClass({
             }
 
             return result
-        }, this)
+        })
     }
-})
+}
+
+ReactRadioGroup.defaultProps = {
+  defaultLabelStyle: {
+      cursor: 'pointer'
+  },
+  defaultInputStyle: {
+      cursor: 'pointer'
+  }
+}
+
+ReactRadioGroup.propTypes = {
+    name: PropTypes.string.isRequired,
+    items(props, name){
+        if (!props.children && !props.items){
+            return new Error('Your component has no children. In this case, you should specify an items array.')
+        }
+    }
+}
